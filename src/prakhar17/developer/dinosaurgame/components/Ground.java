@@ -10,13 +10,21 @@ import java.util.Objects;
 
 public class Ground implements GameConstants {
     private final BufferedImage groundImage;
+    private int x;
 
     public Ground() throws IOException {
         groundImage = ImageIO.read(Objects.requireNonNull(getClass().getResource("/resource/ground-dino.png")));
     }
 
+    public void moveGroundBySpeed(int speed) {
+        x = x + speed;
+        if (groundImage.getWidth() - x < GW) {
+            x = 0;
+        }
+    }
+
     public void printGround(Graphics pen) throws IOException {
-        BufferedImage groundSubImage = groundImage.getSubimage(1000, 0, 700, 24);
-        pen.drawImage(groundSubImage, 0, 600, GW, 50, null);
+        BufferedImage groundSubImage = groundImage.getSubimage(x, 0, GW, 24);
+        pen.drawImage(groundSubImage, 0, GH - 100, GW, 50, null);
     }
 }

@@ -7,4 +7,5 @@ public interface GameConstants {
     int GB_RED = Integer.parseInt(ConfigReader.getValue("background.colour.red"));
     int GB_GREEN = Integer.parseInt(ConfigReader.getValue("background.colour.green"));
     int GB_BLUE = Integer.parseInt(ConfigReader.getValue("background.colour.blue"));
+    int DELAY = 100;
 }

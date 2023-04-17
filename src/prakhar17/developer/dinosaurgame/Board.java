@@ -5,11 +5,23 @@ import prakhar17.developer.dinosaurgame.utils.GameConstants;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 
 public class Board extends JPanel implements GameConstants {
+    private final Ground ground;
+    private int gameSpeed;
 
-    Board() {
+    protected Board() {
+        gameLoop();
+        gameSpeed = 50;
+
+        try {
+            ground = new Ground();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -18,7 +30,7 @@ public class Board extends JPanel implements GameConstants {
         printBackground(pen);
 
         try {
-            new Ground().printGround(pen);
+            ground.printGround(pen);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -27,5 +39,15 @@ public class Board extends JPanel implements GameConstants {
     private void printBackground(Graphics pen) {
         pen.setColor(new Color(GB_RED, GB_GREEN, GB_BLUE));
         pen.fillRect(0, 0, GW, GH);
+    }
+
+    private void gameLoop() {
+        new Timer(DELAY, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ground.moveGroundBySpeed(gameSpeed);
+                repaint();
+            }
+        }).start();
     }
 }
