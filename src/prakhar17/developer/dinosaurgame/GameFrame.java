@@ -1,11 +1,13 @@
 package prakhar17.developer.dinosaurgame;
 
+import prakhar17.developer.dinosaurgame.utils.GameConstants;
+
 import javax.swing.*;
 
-public class GameFrame extends JFrame {
+public class GameFrame extends JFrame implements GameConstants {
     public GameFrame() {
-        setSize(1300, 700);
-        setTitle("Dinosaur Game");
+        setSize(GW, GH);
+        setTitle(TITLE);
         setLocationRelativeTo(null);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
