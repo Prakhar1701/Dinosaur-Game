@@ -11,6 +11,7 @@ public class GameFrame extends JFrame implements GameConstants {
         setLocationRelativeTo(null);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        add(new Board());
         setVisible(true);
     }
 
