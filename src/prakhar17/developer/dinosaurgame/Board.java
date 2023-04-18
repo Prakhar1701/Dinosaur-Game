@@ -1,5 +1,6 @@
 package prakhar17.developer.dinosaurgame;
 
+import prakhar17.developer.dinosaurgame.components.Cloud;
 import prakhar17.developer.dinosaurgame.components.Dinosaur;
 import prakhar17.developer.dinosaurgame.components.Ground;
 import prakhar17.developer.dinosaurgame.components.Top;
@@ -13,8 +14,9 @@ import java.io.IOException;
 
 public class Board extends JPanel implements GameConstants {
     private final Ground ground;
-    private Top top;
-    private Dinosaur dino;
+    private final Top top;
+    private final Dinosaur dino;
+    private final Cloud cloud;
     private int gameSpeed;
 
 
@@ -25,12 +27,14 @@ public class Board extends JPanel implements GameConstants {
         top = new Top();
         dino = new Dinosaur();
         ground = new Ground();
+        cloud = new Cloud();
     }
 
     @Override
     protected void paintComponent(Graphics pen) {
         super.paintComponent(pen);
         printBackground(pen);
+        cloud.printCloud(pen);
         dino.printRun(pen);
 
         try {
