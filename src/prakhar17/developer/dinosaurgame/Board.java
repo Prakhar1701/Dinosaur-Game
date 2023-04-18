@@ -1,5 +1,6 @@
 package prakhar17.developer.dinosaurgame;
 
+import prakhar17.developer.dinosaurgame.components.Dinosaur;
 import prakhar17.developer.dinosaurgame.components.Ground;
 import prakhar17.developer.dinosaurgame.components.Top;
 import prakhar17.developer.dinosaurgame.utils.GameConstants;
@@ -13,25 +14,24 @@ import java.io.IOException;
 public class Board extends JPanel implements GameConstants {
     private final Ground ground;
     private Top top;
+    private Dinosaur dino;
     private int gameSpeed;
 
-    protected Board() {
+
+    protected Board() throws IOException {
         gameLoop();
         gameSpeed = 50;
 
         top = new Top();
-
-        try {
-            ground = new Ground();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        dino = new Dinosaur();
+        ground = new Ground();
     }
 
     @Override
     protected void paintComponent(Graphics pen) {
         super.paintComponent(pen);
         printBackground(pen);
+        dino.printRun(pen);
 
         try {
             top.printTop(pen);
