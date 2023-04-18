@@ -40,7 +40,7 @@ public class Board extends JPanel implements GameConstants {
         printBackground(pen);
         cloud.printCloud(pen);
         dino.printRun(pen);
-        obstacle.printObstacleCactus(pen, 6);
+        obstacle.printRandomObstacleCactus(pen);
 
         try {
             top.printTop(pen);

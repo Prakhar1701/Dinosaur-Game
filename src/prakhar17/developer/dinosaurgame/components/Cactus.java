@@ -27,12 +27,24 @@ public class Cactus implements GameConstants {
         cactus[5] = spriteImage.getSubimage(802, 1, 151, 98);
     }
 
-    public void printObstacleCactus(Graphics pen, int obsNo) {
+    private void printObstacleCactus(Graphics pen, int obsNo) {
         BufferedImage obstacle = cactus[obsNo - 1];
         switch (obsNo) {
             case 1, 2, 3 -> pen.drawImage(obstacle, 1000, GROUND + 22, obstacle.getWidth(), obstacle.getHeight(), null);
             case 4, 5 -> pen.drawImage(obstacle, 1000, GROUND - 2, obstacle.getWidth(), obstacle.getHeight(), null);
             case 6 -> pen.drawImage(obstacle, 1000, GROUND - 4, obstacle.getWidth(), obstacle.getHeight(), null);
+        }
+    }
+
+    public void printRandomObstacleCactus(Graphics pen) {
+        int randomObsNo = (int) (Math.random() * 10);
+        switch (randomObsNo) {
+            case 0, 1 -> printObstacleCactus(pen, 1);
+            case 2, 3 -> printObstacleCactus(pen, 2);
+            case 4, 5 -> printObstacleCactus(pen, 3);
+            case 6, 7 -> printObstacleCactus(pen, 4);
+            case 8 -> printObstacleCactus(pen, 5);
+            case 9 -> printObstacleCactus(pen, 6);
         }
     }
 }
