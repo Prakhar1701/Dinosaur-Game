@@ -1,9 +1,6 @@
 package prakhar17.developer.dinosaurgame;
 
-import prakhar17.developer.dinosaurgame.components.Cloud;
-import prakhar17.developer.dinosaurgame.components.Dinosaur;
-import prakhar17.developer.dinosaurgame.components.Ground;
-import prakhar17.developer.dinosaurgame.components.Top;
+import prakhar17.developer.dinosaurgame.components.*;
 import prakhar17.developer.dinosaurgame.utils.GameConstants;
 
 import javax.swing.*;
@@ -19,17 +16,19 @@ public class Board extends JPanel implements GameConstants {
     private final Top top;
     private final Dinosaur dino;
     private final Cloud cloud;
+    private final Cactus obstacle;
     private int gameSpeed;
 
 
     protected Board() throws IOException {
         gameLoop();
-        gameSpeed = DELAY/2;
+        gameSpeed = DELAY / 2;
 
         top = new Top();
         dino = new Dinosaur();
         ground = new Ground();
         cloud = new Cloud();
+        obstacle = new Cactus();
 
         setFocusable(true);
         bindEvents();
@@ -41,6 +40,7 @@ public class Board extends JPanel implements GameConstants {
         printBackground(pen);
         cloud.printCloud(pen);
         dino.printRun(pen);
+        obstacle.printObstacleCactus(pen, 6);
 
         try {
             top.printTop(pen);
