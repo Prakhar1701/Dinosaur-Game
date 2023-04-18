@@ -12,12 +12,14 @@ public class Dinosaur implements GameConstants {
     private final BufferedImage spriteImage;
     private final BufferedImage[] dinosaurRunImages;
     private int index;
+    private int y;
 
     public Dinosaur() throws IOException {
         spriteImage = ImageIO.read(Objects.requireNonNull(getClass().getResource("/resource/sprite-dino.png")));
         dinosaurRunImages = new BufferedImage[4];
         loadRunImages();
         index = 0;
+        y = GROUND; //On Ground
     }
 
     private void loadRunImages() {
@@ -32,7 +34,18 @@ public class Dinosaur implements GameConstants {
             index = 0;
         }
         BufferedImage currentRunImage = dinosaurRunImages[index];
-        pen.drawImage(currentRunImage, GW - 1100, GH - 174, currentRunImage.getWidth(), currentRunImage.getHeight(), null);
+        pen.drawImage(currentRunImage, GW - 1100, y, currentRunImage.getWidth(), currentRunImage.getHeight(), null);
         index++;
+    }
+
+    public void jump() {
+        int jumpForce = 200;
+        y = y - jumpForce;
+    }
+
+    public void fall() {
+        if (y < GROUND) {
+            y = y - GRAVITY;
+        }
     }
 }

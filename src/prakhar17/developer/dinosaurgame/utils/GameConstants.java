@@ -8,4 +8,6 @@ public interface GameConstants {
     int GB_GREEN = Integer.parseInt(ConfigReader.getValue("background.colour.green"));
     int GB_BLUE = Integer.parseInt(ConfigReader.getValue("background.colour.blue"));
     int DELAY = 100;
+    int GROUND = GH - 174;
+    int GRAVITY = -50;
 }
