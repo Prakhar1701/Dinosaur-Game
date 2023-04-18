@@ -1,6 +1,7 @@
 package prakhar17.developer.dinosaurgame;
 
 import prakhar17.developer.dinosaurgame.components.Ground;
+import prakhar17.developer.dinosaurgame.components.Top;
 import prakhar17.developer.dinosaurgame.utils.GameConstants;
 
 import javax.swing.*;
@@ -11,11 +12,14 @@ import java.io.IOException;
 
 public class Board extends JPanel implements GameConstants {
     private final Ground ground;
+    private Top top;
     private int gameSpeed;
 
     protected Board() {
         gameLoop();
         gameSpeed = 50;
+
+        top = new Top();
 
         try {
             ground = new Ground();
@@ -29,6 +33,11 @@ public class Board extends JPanel implements GameConstants {
         super.paintComponent(pen);
         printBackground(pen);
 
+        try {
+            top.printTop(pen);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         try {
             ground.printGround(pen);
         } catch (IOException e) {
