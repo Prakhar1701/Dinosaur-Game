@@ -39,7 +39,7 @@ public class Dinosaur implements GameConstants {
     }
 
     public void jump() {
-        int jumpForce = 200;
+        int jumpForce = 250;
         y = y - jumpForce;
     }
 

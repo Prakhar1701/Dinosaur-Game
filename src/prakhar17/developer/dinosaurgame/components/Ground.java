@@ -18,7 +18,7 @@ public class Ground implements GameConstants {
 
     public void moveGroundBySpeed(int speed) {
         x = x + speed;
-        if (groundImage.getWidth() - x < GW) {
+        if (groundImage.getWidth() - x < GW+1000) {
             x = 0;
         }
     }

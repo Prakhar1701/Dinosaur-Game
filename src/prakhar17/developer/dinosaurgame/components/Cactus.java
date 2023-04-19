@@ -11,11 +11,15 @@ import java.util.Objects;
 public class Cactus implements GameConstants {
     private final BufferedImage spriteImage;
     private final BufferedImage[] cactus;
+    private final int randomObsNo;
+    private int x;
 
     public Cactus() throws IOException {
         spriteImage = ImageIO.read(Objects.requireNonNull(getClass().getResource("/resource/sprite-dino.png")));
         cactus = new BufferedImage[6];
         loadObstacleCactus();
+        randomObsNo = (int) (Math.random() * 10);
+        x = GW;
     }
 
     private void loadObstacleCactus() {
@@ -30,14 +34,13 @@ public class Cactus implements GameConstants {
     private void printObstacleCactus(Graphics pen, int obsNo) {
         BufferedImage obstacle = cactus[obsNo - 1];
         switch (obsNo) {
-            case 1, 2, 3 -> pen.drawImage(obstacle, 1000, GROUND + 22, obstacle.getWidth(), obstacle.getHeight(), null);
-            case 4, 5 -> pen.drawImage(obstacle, 1000, GROUND - 2, obstacle.getWidth(), obstacle.getHeight(), null);
-            case 6 -> pen.drawImage(obstacle, 1000, GROUND - 4, obstacle.getWidth(), obstacle.getHeight(), null);
+            case 1, 2, 3 -> pen.drawImage(obstacle, x, GROUND + 22, obstacle.getWidth(), obstacle.getHeight(), null);
+            case 4, 5 -> pen.drawImage(obstacle, x, GROUND - 2, obstacle.getWidth(), obstacle.getHeight(), null);
+            case 6 -> pen.drawImage(obstacle, x, GROUND - 4, obstacle.getWidth(), obstacle.getHeight(), null);
         }
     }
 
     public void printRandomObstacleCactus(Graphics pen) {
-        int randomObsNo = (int) (Math.random() * 10);
         switch (randomObsNo) {
             case 0, 1 -> printObstacleCactus(pen, 1);
             case 2, 3 -> printObstacleCactus(pen, 2);
@@ -46,5 +49,9 @@ public class Cactus implements GameConstants {
             case 8 -> printObstacleCactus(pen, 5);
             case 9 -> printObstacleCactus(pen, 6);
         }
+    }
+
+    public void moveObstacleCactusBySpeed(int speed) {
+        x = x - speed;
     }
 }

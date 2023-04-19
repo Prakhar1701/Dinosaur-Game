@@ -17,12 +17,12 @@ public class Board extends JPanel implements GameConstants {
     private final Dinosaur dino;
     private final Cloud cloud;
     private final Cactus obstacle;
-    private int gameSpeed;
+    private final int speed;
 
 
     protected Board() throws IOException {
         gameLoop();
-        gameSpeed = DELAY / 2;
+        speed = 50;
 
         top = new Top();
         dino = new Dinosaur();
@@ -40,7 +40,9 @@ public class Board extends JPanel implements GameConstants {
         printBackground(pen);
         cloud.printCloud(pen);
         dino.printRun(pen);
+        ground.moveGroundBySpeed(speed);
         obstacle.printRandomObstacleCactus(pen);
+        obstacle.moveObstacleCactusBySpeed(speed);
 
         try {
             top.printTop(pen);
@@ -52,6 +54,8 @@ public class Board extends JPanel implements GameConstants {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+        dino.fall();
     }
 
     private void printBackground(Graphics pen) {
@@ -63,9 +67,7 @@ public class Board extends JPanel implements GameConstants {
         new Timer(DELAY, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ground.moveGroundBySpeed(gameSpeed);
                 repaint();
-                dino.fall();
             }
         }).start();
     }
