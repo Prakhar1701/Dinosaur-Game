@@ -11,14 +11,14 @@ import java.util.Objects;
 public class Cactus implements GameConstants {
     private final BufferedImage spriteImage;
     private final BufferedImage[] cactus;
-    private final int randomObsNo;
+    private int randomObsNo = (int) (Math.random() * 10);
     private int x;
+
 
     public Cactus() throws IOException {
         spriteImage = ImageIO.read(Objects.requireNonNull(getClass().getResource("/resource/sprite-dino.png")));
         cactus = new BufferedImage[6];
         loadObstacleCactus();
-        randomObsNo = (int) (Math.random() * 10);
         x = GW;
     }
 
@@ -53,5 +53,9 @@ public class Cactus implements GameConstants {
 
     public void moveObstacleCactusBySpeed(int speed) {
         x = x - speed;
+        if (x == 0) {
+            x = GW;
+            randomObsNo = (int) (Math.random() * 10);
+        }
     }
 }
