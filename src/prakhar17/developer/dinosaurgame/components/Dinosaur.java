@@ -13,6 +13,7 @@ public class Dinosaur implements GameConstants {
     private final BufferedImage[] dinosaurRunImages;
     private int index;
     private int y;
+    private boolean isJumping;
 
     public Dinosaur() throws IOException {
         spriteImage = ImageIO.read(Objects.requireNonNull(getClass().getResource("/resource/sprite-dino.png")));
@@ -20,6 +21,7 @@ public class Dinosaur implements GameConstants {
         loadRunImages();
         index = 0;
         y = GROUND; //On Ground
+        isJumping = false;
     }
 
     private void loadRunImages() {
@@ -39,13 +41,17 @@ public class Dinosaur implements GameConstants {
     }
 
     public void jump() {
+        if (isJumping) return;
         int jumpForce = 250;
         y = y - jumpForce;
+        isJumping = true;
     }
 
     public void fall() {
         if (y < GROUND) {
             y = y - GRAVITY;
+        } else if (y == GROUND) {
+            isJumping = false;
         }
     }
 }
