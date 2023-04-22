@@ -11,6 +11,7 @@ import java.util.Objects;
 public class Dinosaur implements GameConstants {
     private final BufferedImage spriteImage;
     private final BufferedImage[] dinosaurRunImages;
+    private final BufferedImage dinosaurDeadImage;
     private int index;
     private int y;
     private boolean isJumping;
@@ -22,6 +23,7 @@ public class Dinosaur implements GameConstants {
     public Dinosaur() throws IOException {
         spriteImage = ImageIO.read(Objects.requireNonNull(getClass().getResource("/resource/sprite-dino.png")));
         dinosaurRunImages = new BufferedImage[4];
+        dinosaurDeadImage = spriteImage.getSubimage(1690, 1, 89, 96);
         loadRunImages();
         index = 0;
         y = GROUND; //On Ground
@@ -42,6 +44,10 @@ public class Dinosaur implements GameConstants {
         BufferedImage currentRunImage = dinosaurRunImages[index];
         pen.drawImage(currentRunImage, GW - 1100, y, currentRunImage.getWidth(), currentRunImage.getHeight(), null);
         index++;
+    }
+
+    public void printDead(Graphics pen) {
+        pen.drawImage(dinosaurDeadImage, GW - 1100, y, dinosaurDeadImage.getWidth(), dinosaurDeadImage.getHeight(), null);
     }
 
     public void jump() {

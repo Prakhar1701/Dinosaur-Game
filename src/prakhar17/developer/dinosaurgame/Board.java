@@ -12,11 +12,13 @@ import java.awt.event.KeyEvent;
 import java.io.IOException;
 
 public class Board extends JPanel implements GameConstants {
+    private Timer timer;
     private final Ground ground;
     private final Top top;
     private final Dinosaur dino;
     private final Cloud cloud;
     private final Cactus obstacle;
+    private final GameOver gameOver;
     private final int speed;
 
 
@@ -29,6 +31,7 @@ public class Board extends JPanel implements GameConstants {
         ground = new Ground();
         cloud = new Cloud();
         obstacle = new Cactus();
+        gameOver = new GameOver();
 
         setFocusable(true);
         bindEvents();
@@ -56,8 +59,11 @@ public class Board extends JPanel implements GameConstants {
         }
 
         dino.fall();
-        if (obstacle.getX() < GW - 1100 && !dino.isJumping()) {
+        if (obstacle.getX() < GW - 1050 && !dino.isJumping()) {
             System.out.println("Game Over");
+            gameOver.printGameOver(pen);
+            dino.printDead(pen);
+            timer.stop();
         }
     }
 
@@ -67,12 +73,13 @@ public class Board extends JPanel implements GameConstants {
     }
 
     private void gameLoop() {
-        new Timer(DELAY, new ActionListener() {
+        timer = new Timer(DELAY, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 repaint();
             }
-        }).start();
+        });
+        timer.start();
     }
 
     private void bindEvents() {
