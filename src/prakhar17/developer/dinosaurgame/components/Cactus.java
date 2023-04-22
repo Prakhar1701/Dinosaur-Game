@@ -14,6 +14,9 @@ public class Cactus implements GameConstants {
     private int randomObsNo = (int) (Math.random() * 10);
     private int x;
 
+    public int getX() {
+        return x;
+    }
 
     public Cactus() throws IOException {
         spriteImage = ImageIO.read(Objects.requireNonNull(getClass().getResource("/resource/sprite-dino.png")));

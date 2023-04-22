@@ -15,6 +15,10 @@ public class Dinosaur implements GameConstants {
     private int y;
     private boolean isJumping;
 
+    public boolean isJumping() {
+        return isJumping;
+    }
+
     public Dinosaur() throws IOException {
         spriteImage = ImageIO.read(Objects.requireNonNull(getClass().getResource("/resource/sprite-dino.png")));
         dinosaurRunImages = new BufferedImage[4];

@@ -56,6 +56,9 @@ public class Board extends JPanel implements GameConstants {
         }
 
         dino.fall();
+        if (obstacle.getX() < GW - 1100 && !dino.isJumping()) {
+            System.out.println("Game Over");
+        }
     }
 
     private void printBackground(Graphics pen) {
